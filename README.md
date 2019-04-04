@@ -1,5 +1,5 @@
-# terraform-openstack-magnum-infra
-Terraform for deploying OpenStack Magnum Clusters
+# terraform-openstack-magnum-clusters
+Terraform for deploying OpenStack Magnum Templates and Clusters
 
 ## Files
 * [main.tf](main.tf)
