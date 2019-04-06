@@ -11,9 +11,10 @@ output "Magnum Private Key:" {
 }
 
 resource "openstack_containerinfra_clustertemplate_v1" "clustertemplate_1" {
-  name                  = "clustertemplate_1"
+  count                 = "${var.enable_template}"
+  name                  = "${var.template_name}"
   image                 = "${var.image}"
-  coe                   = "kubernetes"
+  coe                   = "${var.coe}"
   flavor                = "${var.flavor_minion}"
   master_flavor         = "${var.flavor_master}"
   dns_nameserver        = "${var.dns_nameserver}""
@@ -42,9 +43,11 @@ output "Cluster Template ID" {
 }
 
 resource "openstack_containerinfra_cluster_v1" "cluster_1" {
-  name                 = "cluster_1"
-  cluster_template_id  = "${openstack_containerinfra_clustertemplate_v1.clustertemplate_1.id}"
-  master_count         = 1
-  node_count           = 2
+  count                = "${var.enable_cluster}"
+  name                 = "${var.cluster_name}"
+# cluster_template_id  = "${openstack_containerinfra_clustertemplate_v1.clustertemplate_1.id}"
+  cluster_template_id  = "${var.cluster_template_id}"
+  master_count         = "${var.master_count}"
+  node_count           = "${var.node_count}"
   keypair              = "magnum"
 }
