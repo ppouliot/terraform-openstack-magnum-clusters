@@ -2,7 +2,7 @@
 
 variable "enable_template" {
   description = "Enable/Disable Template"
-  default = 0
+  default     = 0
 }
 
 variable "template_name" {
@@ -22,34 +22,34 @@ variable "fixed_subnet_name" {
   description = "The OpenStack Network Subnet Name"
 }
 
-variable "docker_volume_size" {
-  description = "The size of the Docker Volume"
-  default     = "5"
-}
+#variable "docker_volume_size" {
+#  description = "The size of the Docker Volume"
+#  default     = "0"
+#}
 
 variable "image" {
   description = "The name of the Glance image to use to create the magnum cluster, typically fedora-atomic or coreos"
-  default = "fedora-atomic"
+  default     = "fedora-atomic-29-aarch64-qcow2"
 }
 
 variable "coe" {
   description = "The Magnum OpenStack Cluster Type"
-  default = "kubernetes"
+  default     = "kubernetes"
 }
 
 variable "flavor_minion" {
   description = "OpenStack image flavor to use for minion instances"
-  default = "cloud.minion"
+  default     = "m1.small"
 }
 
 variable "flavor_master" {
   description = "OpenStack image flavor to use for minion instances"
-  default = "cloud.master"
+  default     = "m1.medium"
 }
 
 variable "dns_nameserver" {
   description = "DNS Nameserver for the cluster to use"
-  default = "1.1.1.1"
+  default     = "1.1.1.1"
 }
 
 variable "enable_cluster" {
@@ -57,19 +57,23 @@ variable "enable_cluster" {
   default     = 0
 }
 
-variable "cluster_template_id" {
-  description = "Allow for cluster to be used independently"
-  default = "${openstack_containerinfra_clustertemplate_v1.clustertemplate_1.id}"
-}
+#variable "cluster_template_id" {
+#  description = "Allow for cluster to be used independently"
+#  default     = "${openstack_containerinfra_clustertemplate_v1.clustertemplate_1.id}"
+#}
+
 variable "cluster_name" {
   description = "Name of the magnum cluster"
-  default = "cluster_1"
+  default     = "cluster_1"
 }
+
 variable "master_count" {
   description = "The number of cluster masters to deploy"
-  default = 1
+  default     = 1
 }
+
 variable "node_count" {
   description = "The number of cluster minionss to deploy"
-  default = 3
+  default     = 3
 }
+

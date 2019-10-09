@@ -1,0 +1,5 @@
+enable_template = "1"
+enable_cluster = "1"
+external_network_id = "public1"
+fixed_network_name = "demo-net"
+fixed_subnet_name = "demo-subnet"
