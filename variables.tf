@@ -22,10 +22,10 @@ variable "fixed_subnet_name" {
   description = "The OpenStack Network Subnet Name"
 }
 
-#variable "docker_volume_size" {
-#  description = "The size of the Docker Volume"
-#  default     = "0"
-#}
+variable "docker_volume_size" {
+  description = "The size of the Docker Volume"
+  default     = 5
+}
 
 variable "image" {
   description = "The name of the Glance image to use to create the magnum cluster, typically fedora-atomic or coreos"
@@ -39,12 +39,12 @@ variable "coe" {
 
 variable "flavor_minion" {
   description = "OpenStack image flavor to use for minion instances"
-  default     = "m1.small"
+  default     = "m1.medium"
 }
 
 variable "flavor_master" {
   description = "OpenStack image flavor to use for minion instances"
-  default     = "m1.medium"
+  default     = "m1.large"
 }
 
 variable "dns_nameserver" {

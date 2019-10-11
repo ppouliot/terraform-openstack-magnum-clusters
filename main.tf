@@ -21,14 +21,16 @@ resource "openstack_containerinfra_clustertemplate_v1" "clustertemplate_1" {
   external_network_id   = var.external_network_id
   fixed_network         = var.fixed_network_name
   fixed_subnet          = var.fixed_subnet_name
-  docker_storage_driver = "overlay"
-# For use with a cinder volume
-# docker_storage_driver = "devicemapper"
-# docker_volume_size    = var.docker_volume_size
-  network_driver        = "flannel"
+# Flannel driver does not work w/ aarch64
+# network_driver        = "flannel"
+  network_driver        = "calico"
   master_lb_enabled     = false
-  floating_ip_enabled   = false
-# volume_driver         = "unspecified"
+  floating_ip_enabled   = true
+# For use with a cinder volume
+# docker_storage_driver = "overlay"
+  docker_storage_driver = "devicemapper"
+  docker_volume_size    = var.docker_volume_size
+  volume_driver         = "cinder"
 
   labels = {
     kube_tag                         = "v1.9.1"
@@ -37,8 +39,10 @@ resource "openstack_containerinfra_clustertemplate_v1" "clustertemplate_1" {
     influx_grafana_dashboard_enabled = "false"
     admission_control_list           = "NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,ResourceQuota"
     kubecontroller_options           = ""
-    cert_manager_api                 = "True"
+#   cert_manager_api                 = "false"
+    cert_manager_api                 = "true"
     cgroup_driver                    = "systemd"
+    cloud_provider_enabled           = "true"
   }
 }
 
@@ -54,6 +58,4 @@ resource "openstack_containerinfra_cluster_v1" "cluster_1" {
   master_count        = var.master_count
   node_count          = var.node_count
   keypair             = "magnum"
-# For use with a cinder volume
-# docker_volume_size  = var.docker_volume_size
 }
